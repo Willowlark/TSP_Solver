@@ -2,6 +2,7 @@ from math import sqrt
 from sys import maxint
 import copy
 import time
+cache = {}
 
 """ 
 This program solves a traveling salesman problem. It takes tsp 
@@ -32,7 +33,7 @@ def combi(xs, low=0):
 
 #Does the distance formula on two lists of an ordered pair.	
 def distance_math(one, two):
-	x = sqrt((int(two[0]) - int(one[0]))**2 + (int(two[1]) - int(one[1]))**2)
+	x = sqrt((two[0] - one[0])**2 + (two[1] - one[1])**2)
 	return x
 
 #Asks for a file, then reads in the relevant information.
@@ -45,7 +46,7 @@ for line in file:
 	if words[0] == 'DIMENSION:':
 		citycount = int(words[1])
 	if words[0].isdigit():
-		x = [int(words[1]), int(words[2])]
+		x = [int(float(words[1])), int(float(words[2]))]
 		cities[int(words[0])] = x
 	else:
 		pass
@@ -54,6 +55,19 @@ for line in file:
 for p in combi([x+1 for x in range(citycount)]):
 	trip_distance = 0
 	for i in range(0, len(p)):
+		'''This is your suggested addition, the cache functionality.
+		While it seemed like it would work faster, the distance_math
+		only calls one function, while the x in s function of the below
+		if statment is O(n). so while the code for getting things from 
+		a dictionary is O(1), the extra O(n) gave us an extra 6 seconds
+		on a mini2, which will continue to impact the code from there.
+		We felt it was best to keep it out. 	
+		'''
+		#if [ p[i], p[(i+1)%len(p)] ] in cache.keys():
+		#	distance = cache[ p[i], p[(i+1)%(len(p))] ]
+		#else:
+		#	distance = distance_math(cities[p[i]], cities[p[(i+1)%len(p)]])
+		#	cache[ p[i], p[(i+1)%(len(p))] ] = distance
 		distance = distance_math(cities[p[i]], cities[p[(i+1)%len(p)]])
 		trip_distance = trip_distance + distance
 	if trip_distance < shortestdistance:
