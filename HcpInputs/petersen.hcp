@@ -1,0 +1,22 @@
+NAME : petersen
+COMMENT : Hamiltonian cycle problem 
+TYPE : HCP
+DIMENSION: 10
+EDGE_DATA_FORMAT : EDGE_LIST
+EDGE_DATA_SECTION
+1 2
+2 3
+3 4
+4 5
+5 1
+1 6
+2 7
+3 8
+4 9
+5 10
+6 8 
+6 9
+7 9
+7 10
+8 10
+EOF

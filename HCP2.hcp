@@ -1,0 +1,12 @@
+NAME: test4
+COMMENT: Hamiltonian cycle problem (Erbacci) with 4 nodes
+TYPE: HCP
+DIMENSION: 4
+EDGE_DATA_FORMAT: EDGE_LIST
+EDGE_DATA_SECTION
+4 3
+4 2
+3 1
+2 1
+-1
+EOF
